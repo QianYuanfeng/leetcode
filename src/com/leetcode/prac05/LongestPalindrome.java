@@ -43,7 +43,6 @@ public class LongestPalindrome {
 
         int palindromeLength = 0;
         int beginIndex = 0;
-        int endIndex = 0;
         String palindrome = "";
         char[] charArray = s.toCharArray();
         for (int i = 0; i < s.length() - 1; i++) {
@@ -54,18 +53,15 @@ public class LongestPalindrome {
             if (oddLength > palindromeLength) {
                 palindromeLength = oddLength;
                 beginIndex = i;
-                endIndex = i;
             }
 
             if (evenLength > palindromeLength) {
                 palindromeLength = evenLength;
                 beginIndex = i;
-                endIndex = i + 1;
             }
         }
         int start = beginIndex - (palindromeLength - 1) / 2;
-        int end = endIndex + (palindromeLength - 1) / 2;
-        palindrome = s.substring(start, end + 1);
+        palindrome = s.substring(start, start + palindromeLength);
 
         if (palindromeLength == 0) {
             return s.substring(0, 1);
@@ -78,43 +74,22 @@ public class LongestPalindrome {
 
     public static int checkPalindromeCenter(char[] charArray, int left, int right) {
         int length = charArray.length;
-        Boolean flag = true;
+
         int result = 0;
 
-        //中心位是一个数
-        if (left == right) {
-            while (left <= right && flag) {
-                if (left - 1 >= 0 && right + 1 < length) {
-                    left--;
-                    right++;
-                    flag = checkPalindrome(charArray, left, right);
-                    if (flag) {
-                        result = right - left + 1;
-                    }
+        int i = left;
+        int j = right;
+        while (i >= 0 && j < length) {
+            if (charArray[i] == charArray[j]) {
+                i--;
+                j++;
+            } else {
+                break;
+            }
 
-                } else {
-                    break;
-                }
-            }
-        } else {
-            //中心位是两个数
-            if (charArray[left] == charArray[right]) {
-                result = 2;
-            }
-            while (left < right && checkPalindrome(charArray, left, right) && flag) {
-                if (left - 1 >= 0 && right + 1 < length && flag) {
-                    left--;
-                    right++;
-                    flag = checkPalindrome(charArray, left, right);
-                    if (flag) {
-                        result = right - left + 1;
-                    }
-                } else {
-
-                    break;
-                }
-            }
         }
+        //跳出循环时，i和j是不满足条件的情况，所以回文长度需要再减去2
+        result = j - i + 1 - 2;
         return result;
 
     }
