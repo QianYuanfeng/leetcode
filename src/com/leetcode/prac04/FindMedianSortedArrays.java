@@ -21,85 +21,58 @@ import java.util.Arrays;
 public class FindMedianSortedArrays {
 
     public static void main(String[] args) {
-        int[] nums1 = {1, 3};
-        int[] nums2 = {2, 4, 5};
+        int[] nums1 = {2};
+        int[] nums2 = {1, 3};
         double medianSortedArrays = findMedianSortedArraysOne(nums1, nums2);
         System.out.println("medianSortedArrays :" + medianSortedArrays);
 
     }
 
-    //1.两个数组的值都取出来，然后放到一个数组里排好序，再找到中位数
+    //两个数组依次比较，构成一个新的数组，取中位数
     public static double findMedianSortedArraysOne(int[] nums1, int[] nums2) {
         double result = 0;
-        ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        for (int i = 0; i < nums1.length; i++) {
-            arrayList.add(nums1[i]);
+
+        int numLengthOne = nums1.length;
+        int numLengthTwo = nums2.length;
+        int[] resultArray = new int[numLengthOne + numLengthTwo];
+
+        int x = 0;
+        int y = 0;
+
+        for (int i = 0; i < numLengthOne + numLengthTwo; i++) {
+            if (x < numLengthOne) {
+                if (y < numLengthTwo) {
+                    if (nums1[x] <= nums2[y]) {
+                        resultArray[i] = nums1[x];
+                        x++;
+                    } else {
+                        resultArray[i] = nums2[y];
+                        y++;
+                    }
+                } else {
+                    resultArray[i] = nums1[x];
+                    x++;
+                }
+
+            } else {
+                resultArray[i] = nums2[y];
+                y++;
+
+            }
+
         }
-        for (int j = 0; j < nums2.length; j++) {
-            arrayList.add(nums2[j]);
+
+        if (resultArray.length % 2 == 0) {
+            //偶数位数 ， 中间两位相加再除以2
+            result = (resultArray[resultArray.length / 2] + resultArray[resultArray.length / 2 - 1]) / 2.0;
+        } else {
+            result = resultArray[resultArray.length / 2];
         }
-        Integer[] ints = new Integer[arrayList.size()];
-        arrayList.toArray(ints);
-        sortArray(ints);
+
+
         return result;
-    }
-
-    public static void sortArray(Integer[] intArray) {
-        System.out.println("intArray :" + Arrays.asList(intArray));
-        int start = 0;
-        int end = intArray.length - 1;
-
-        if (end - start > 0) {
-//            sortArray(intArray);
-            int left = start;
-            int right = (end - start) / 2 + 1;
-
-            int index = 0;
-            Integer[] result = new Integer[end - start + 1];
-
-            while (left <= (right - left) / 2 && right <= end) {
-                System.out.println("left:" + left + "; right:" + right + "; (right - left) / 2 :" + (right - left) / 2);
-                if (intArray[left] <= intArray[right]) {
-                    System.out.println("intArray[left] : " + intArray[left] + "; intArray[right] :" + right);
-                    result[index] = intArray[left];
-                    left++;
-                } else {
-
-                    result[index] = intArray[right];
-                    right++;
-                }
-//                System.out.println("left :" + left + ";right:" + right);
-                System.out.println("result :" + Arrays.asList(result));
-                index++;
-            }
-
-            while (left <= (right - left) / 2 || right <= end) {
-                System.out.println("left:" + left + " ;right:" + right + ";(right - left)/2 : " + (right - left) / 2);
-                if (left <= (right - left) / 2) {
-                    System.out.println("left");
-                    result[index] = intArray[left];
-                    left++;
-                } else {
-                    System.out.println("right");
-                    result[index] = intArray[right];
-                    right++;
-                }
-//                System.out.println("left :" + left + ";right:" + right);
-                System.out.println("result :" + Arrays.asList(result));
-                index++;
-            }
-
-            System.out.println("result :" + Arrays.asList(result));
-
-            for (int i = start; i <= end; i++) {
-                intArray[i] = result[i ];
-            }
-
-            System.out.println("intArray :" + Arrays.asList(intArray));
-        }
 
 
     }
-
 
 }
