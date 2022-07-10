@@ -12,12 +12,12 @@ public class LengthOfLongestSubstring {
     private static Logger logger = LoggerFactory.getLogger(LengthOfLongestSubstring.class);
 
     public static void main(String[] args) {
-        String str = " ";
+        String str = "abba";
         int i = lengthOfLongestSubstring(str);
         System.out.println("i:" + i);
 
-        int j = maxString(str);
-        System.out.println("j:" + j);
+        //int j = maxString(str);
+        //System.out.println("j:" + j);
 
     }
 
@@ -65,7 +65,9 @@ public class LengthOfLongestSubstring {
      * @return
      */
     public static int lengthOfLongestSubstring(String s) {
+        //最长子串长度
         int max = 0;
+        //滑动窗口左下标，i相当于滑动窗口右下标
         int left = 0;
         HashMap<Character, Integer> hashMap = new HashMap<>();
         if (s == null || s.length() == 0) {
@@ -75,9 +77,11 @@ public class LengthOfLongestSubstring {
             // 当遇到重复值，说明左指针需要跳转，跳转的位置是该重复值的下标+1
             // 比如字符串abcdecf，到遇到第二个c，即便从bcde任意一个开始，长度都无法超过a，只有从decf开始计算才是新一轮查找
             // 值得注意的是，如果碰到了重复值的下标比左指针还小的情况，不应该跳转，因为左指针左边的元素不再窗口内，比如abba
-            if (hashMap.containsKey(s.charAt(i))) {
+            if (hashMap.containsKey(s.charAt(i))) { //charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
+                //map.get():返回字符所对应的索引，当发现重复元素时，窗口左指针右移
                 left = Math.max(hashMap.get(s.charAt(i)) + 1, left);
             }
+            //再更新map中a映射的下标
             hashMap.put(s.charAt(i), i);
             max = Math.max(max, i - left + 1);
         }
