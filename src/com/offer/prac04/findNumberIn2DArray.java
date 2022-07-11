@@ -21,6 +21,15 @@ public class findNumberIn2DArray {
 
     }
 
+    /**
+     * 线性查找
+     * 时间复杂度：O(n+m),访问到的下标的行最多增加 n 次，列最多减少 m 次，因此循环体最多执行 n + m 次。
+     * 空间复杂度：O(1)
+     *
+     * @param matrix
+     * @param target
+     * @return
+     */
     public static boolean findNumberIn2DArray(int[][] matrix, int target) {
         //从左下方开始
         int leftLength = matrix.length;
