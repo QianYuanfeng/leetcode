@@ -1,5 +1,6 @@
 package com.offer.prac06;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -54,6 +55,59 @@ public class reversePrint {
 
         return intArray;
 
+
+    }
+
+
+    /**
+     * 0802 栈
+     *
+     * @param head
+     * @return
+     */
+    public static int[] reversePrint2(ListNode head) {
+
+        ListNode temp = head;
+        Stack<ListNode> stack = new Stack<ListNode>();
+        int length = 0;
+        while (temp != null) {
+            stack.push(temp);
+            temp = temp.next;
+            length++;
+        }
+        int[] arr = new int[length];
+        for (int i = 0; i < length; i++) {
+            int val = stack.pop().val;
+            arr[i] = val;
+        }
+        return arr;
+
+
+    }
+
+    /**
+     * 递归
+     *
+     * @param head
+     * @return
+     */
+    public static int[] reversePrint3(ListNode head) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        recursion(head, arrayList);
+        int[] arr = new int[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            arr[i] = arrayList.get(i);
+        }
+        return arr;
+    }
+
+    public static void recursion(ListNode head, ArrayList<Integer> arrayList) {
+        if (head == null) {
+            return;
+        }
+
+        recursion(head.next, arrayList);
+        arrayList.add(head.val);
 
     }
 
