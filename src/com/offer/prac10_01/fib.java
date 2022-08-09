@@ -11,7 +11,7 @@ package com.offer.prac10_01;
 public class fib {
 
     public static void main(String[] args) {
-        int i = fibDynamic(44);
+        int i = fib3(5);
         System.out.println(i);
     }
 
@@ -34,6 +34,12 @@ public class fib {
     }
 
 
+    /**
+     * 动态规划
+     *
+     * @param n
+     * @return
+     */
     public static int fibDynamic(int n) {
         int[] dp = new int[n + 1];
         if (n == 0 || n == 1) {
@@ -53,5 +59,25 @@ public class fib {
 
     // f(n) = f(n-1) + f(n-2) = 2f(n-2) + f(n-3) = 2(f(n-3) + f(n-4)) + f(n-3) = 3f(n-3) + 2f(n-4) = (n-2) f(2) + (n-3) f(1)
     //
+
+    /**
+     * 0808
+     *
+     * @param n
+     * @return
+     */
+    public static int fib3(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        }
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = (dp[i - 1] + dp[i - 2]) % 1000000007;
+        }
+        return dp[n];
+
+    }
 
 }
