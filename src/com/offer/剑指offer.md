@@ -97,6 +97,12 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 1 <= arr.length <= 10^5
 -100 <= arr[i] <= 100
 
+#剑指 Offer(2) 50. 第一个只出现一次的字符
+在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
+示例 1:
+输入：s = "abaccdeff"
+输出：'b'
 
 
 #剑指 Offer 22. 链表中倒数第k个节点
@@ -117,5 +123,17 @@ pre cur
 null <-  1 <- 2 <-  3  <- 4 <- 5 
 
 pre <- cur 
+
+# 剑指 Offer 06. 从尾到头打印链表
+输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+
+思路：
+1.递归
+2.栈
+
+#剑指 Offer 52. 两个链表的第一个公共节点
+输入两个链表，找出它们的第一个公共节点。
+如下面的两个链表：
+https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/
 
 
