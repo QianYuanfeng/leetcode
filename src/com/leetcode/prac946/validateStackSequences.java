@@ -1,0 +1,30 @@
+package com.leetcode.prac946;
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+/**
+ * 946. 验证栈序列
+ * 给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。
+ * <p>
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode.cn/problems/validate-stack-sequences
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+public class validateStackSequences {
+
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Deque<Integer> deque = new LinkedList<>();
+        int n = pushed.length;
+        for (int i = 0, j = 0; i < n; i++) {
+            deque.push(pushed[i]);
+            while (!deque.isEmpty() && deque.peek() == popped[j]) {
+                deque.pop();
+                j++;
+            }
+        }
+        return deque.isEmpty();
+    }
+
+
+}
